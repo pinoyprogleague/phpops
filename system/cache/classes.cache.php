@@ -30,6 +30,11 @@ function cache_classes_Add($classname, $path)
 
 
 
+/**
+ * Destroy a cache content file
+ *
+ * @param string    $content_file_path Path to the content file
+ */
 function cache_classes_DestroyContentFile($content_file_path=NULL)
 {
     $filepath = POPS_SYSTEM_PATH.'tmp/'.session_id().'.tmp.php';

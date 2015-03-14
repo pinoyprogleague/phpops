@@ -1,6 +1,7 @@
 <?php
 
-/*
+
+/**
  * PHPOps Front manager
  */
 //------------------------------------------------------------------------------
@@ -50,7 +51,27 @@ define( 'POPS_APP_TEMPLATES_PATH'
     , POPS_APPLICATION_PATH . POPS_APP_TEMPLATES_DIRNAME . '/' );
 
 //------------------------------------------------------------------------------
-//  6)  ADDON constants
+//  6)  Application PAGES constants
+//------------------------------------------------------------------------------
+
+/** Directory name */
+define('POPS_APP_PAGES_DIRNAME', 'pages');
+/** Path */
+define( 'POPS_APP_PAGES_PATH'
+    , POPS_APPLICATION_PATH . POPS_APP_PAGES_DIRNAME . '/' );
+
+//------------------------------------------------------------------------------
+//  7)  Application VIEWS constants
+//------------------------------------------------------------------------------
+
+/** Directory name */
+define('POPS_APP_VIEWS_DIRNAME', 'views');
+/** Path */
+define( 'POPS_APP_VIEWS_PATH'
+    , POPS_APPLICATION_PATH . POPS_APP_VIEWS_DIRNAME . '/' );
+
+//------------------------------------------------------------------------------
+//  8)  ADDON constants
 //------------------------------------------------------------------------------
 
 /** Directory name */
@@ -61,7 +82,7 @@ define( 'POPS_ADDON_PATH'
 
 
 //------------------------------------------------------------------------------
-//  7)  LOAD STARTUP ITEMS (ordered)
+//  9)  LOAD STARTUP ITEMS (ordered)
 //------------------------------------------------------------------------------
 $_basepath = POPS_SYSTEM_PATH . 'startup/';
 # FileSpider
