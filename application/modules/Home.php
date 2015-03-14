@@ -2,8 +2,7 @@
 
 namespace MODULES;
 
-use POPS;
-use POPS\Controllers;
+use POPS\Controllers\PageController;
 
 /**
  * Home controller

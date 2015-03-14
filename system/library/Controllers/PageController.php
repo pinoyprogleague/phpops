@@ -48,7 +48,6 @@ class PageController extends \POPS\Controller {
     }
 
 
-
     /**
      * Get all child Module components of this Page controller
      *
@@ -57,8 +56,6 @@ class PageController extends \POPS\Controller {
     public function getChildCollection() {
         RETURN $this->children;
     }
-
-
 
 
     /**
@@ -71,7 +68,6 @@ class PageController extends \POPS\Controller {
     }
 
 
-
     /**
      * Check if this Page controller has child Module components
      *
@@ -82,7 +78,6 @@ class PageController extends \POPS\Controller {
     }
 
 
-
     /**
      * Check if this PageController has default template
      *
@@ -91,7 +86,6 @@ class PageController extends \POPS\Controller {
     public function hasTemplate() {
         RETURN $this->template!==NULL;
     }
-
 
 
     /**
@@ -123,19 +117,15 @@ class PageController extends \POPS\Controller {
     }
 
 
-
     /**
      * Set its default template controller
      *
      * @param \POPS\Controllers\TemplateController $template The new template controller to be plugged to this page
      */
     public function setTemplate(TemplateController $template) {
-
         $this->template = $template;
         $this->template->setParent($this);
-
     }
-
 
 
     /**
