@@ -1,0 +1,17 @@
+Put all your add-on library files in this directory
+Read the important guidelines below before working with your add-on classes to work
+
+[ Important guidelines ]
+
+1. Make sure you will use "folder-based naming standard" of namespaces in your classes
+Example:
+* If a class is located at './MyObjects/Person.php', use namespace 'MyObjects'
+* If a class is located at './MyObjects/Sub/Animal.php', use namespace 'MyObjects\Sub'
+
+2. If a class is in the root add-on folder, then there is no need to use namespace in your class
+
+3. Allowed file extensions are:
+	.php
+	.addon.php
+	.class.php
+Other than those file extensions will not be found by FileSpider
