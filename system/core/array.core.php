@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * Array core
+ *
+ * This includes additional helpers for arrays
+ */
+
 
 /**
  * Count all elements in an array
@@ -9,7 +20,7 @@
  *
  * @return int
  */
-function core_array_count($array_or_countable, $mode=COUNT_NORMAL)
+function core_array_Count($array_or_countable, $mode=COUNT_NORMAL)
 {
     RETURN count($array_or_countable, $mode);
 }
@@ -22,9 +33,9 @@ function core_array_count($array_or_countable, $mode=COUNT_NORMAL)
  *
  * @return boolean
  */
-function core_array_empty($array_or_countable)
+function core_array_Empty($array_or_countable)
 {
-    RETURN core_array_count($array_or_countable)===0;
+    RETURN core_array_Count($array_or_countable)===0;
 }
 
 
@@ -38,12 +49,12 @@ function core_array_empty($array_or_countable)
  *
  * @return mixed The array key of occurence
  */
-function core_array_search($search, $array, $is_exact=TRUE, $is_casesensitive=FALSE)
+function core_array_Search($search, $array, $is_exact=TRUE, $is_casesensitive=FALSE)
 {
     for ( $x=0,reset($array); $x<count($array); $x++,next($array) )
     {
         if ( is_array(current($array)) ) {
-            RETURN core_array_search($search, $array, $is_exact);
+            RETURN core_array_Search($search, $array, $is_exact);
         }
         else {
             $search = $is_casesensitive ? $search : (is_string($search)?strtolower($search):$search);

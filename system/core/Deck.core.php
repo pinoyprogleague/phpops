@@ -1,10 +1,16 @@
 <?php
 
-//------------------------------------------------------------------------------
-// PHPOps Flight Deck
-//
-//  Core application launcher and flight helpers
-//------------------------------------------------------------------------------
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * The Main Deck
+ *
+ * Mostly system-related helpers for launching current framework
+ *
+ */
 
 
 
@@ -50,7 +56,7 @@ function coresys_deck_DeriveCallable($uri=NULL)
 
 
 /**
- * Read current URI into an URI commands array
+ * Read current URI into a URI commands array
  *
  * @param string $uricmd The URI command, you may want to use the function core_uri_Get() ^_^
  *

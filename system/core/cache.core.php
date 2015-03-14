@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * Cache core
+ *
+ * This includes core helpers for basic Caching support
+ */
+
 
 /**
  * Set a value in cache

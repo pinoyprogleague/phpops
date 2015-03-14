@@ -1,10 +1,17 @@
 <?php
 
-//------------------------------------------------------------------------------
-// String Core
-//
-//  Special string functions
-//------------------------------------------------------------------------------
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * String helpers
+ *
+ * This includes core helpers for additional string manipulations
+ */
+
+
 
 /**
  * Remove redundant consecutive occurences of characters in a string
@@ -41,7 +48,7 @@ function core_str_RemoveConsecutive($string, POPS\Types\Character $char=NULL)
 function core_str_RemoveConsecutives($string, POPS\Types\Collection $characters)
 {
     $result = $string;
-    for ( $characters->rewind(); $characters->getIndex()<$characters->count(); $x++,$characters->next() )
+    for ( $characters->rewind(); $characters->getIndex() < $characters->count(); $x++,$characters->next() )
     {
         $result = core_str_RemoveConsecutive($result, $characters->current());
     }

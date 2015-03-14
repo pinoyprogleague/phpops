@@ -1,9 +1,15 @@
 <?php
 
-//------------------------------------------------------------------------------
-// Core functions for user-defined functions
-//
-//------------------------------------------------------------------------------
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * Function reflection helpers
+ *
+ * This includes helpers for function/method reflections
+ */
 
 
 
@@ -11,7 +17,7 @@
  * Convert function arguments into Collection
  *
  * @param array $functionArgs Array of function arguments which is a value of method `func_get_args()`
- *
+ * 
  * @return \POPS\Types\Collection Resulting Collection of function arguments
  */
 function core_func_ArgsToCollection(array $functionArgs) {

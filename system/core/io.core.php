@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * Input-Output core helper
+ *
+ * This includes core helpers for Input-Output operations
+ */
+
 
 /**
  * Remove a directory (whether empty directory or not)
@@ -49,7 +60,7 @@ function core_io_DirTruncate($dirpath) {
  */
 function core_io_FileDelete($filepath, $maxattempts=1) {
     $filepath = core_io_ParsePath($filepath);
-    
+
     // Check if file exists
     if (!file_exists($filepath) || !is_file($filepath)) {
         return;

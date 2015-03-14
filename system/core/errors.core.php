@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * Errors and Exceptions core
+ *
+ * This includes helper for handling system-level errors and exceptions
+ */
+
 /**
  * [ SYSTEM USE ONLY ]
  */
@@ -30,6 +41,10 @@ function coresys_handle_error($level, $str, $file, $line)
     echo '</div>';
 }
 
+
+/**
+ * [ SYSTEM USE ONLY ]
+ */
 function coresys_handle_exception(\Exception $ex)
 {
     echo '<div style="border:2px solid #f00; padding:2%; font-family:arial;" align="left">';

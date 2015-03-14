@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * Data core
+ *
+ * This includes core helpers that can be used for system-level data
+ */
+
 /**
  * Get the value of a session key
  *

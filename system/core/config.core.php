@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * Made under PHPOps Open-Source Non-proprietary Project
+ *
+ * Pinoy Programmers League
+ *
+ * -----------------------------------------------------------------------------
+ * Configuration helpers
+ *
+ * This includes core helpers for configuration files
+ */
+
 /**
  * Read configuration
  *
@@ -7,7 +18,7 @@
  * @param string $key {=NULL} Key to be looked up
  * @return mixed The config contents in array will be returned IF KEY WAS NOT SPECIFIED, otherwise, the value of the key. FALSE if key or config file doesn't exist.
  */
-function core_config_read($path, $key=NULL)
+function core_config_Read($path, $key=NULL)
 {
     $parsed = parse_ini_file($path);
     if ( $parsed!==FALSE )

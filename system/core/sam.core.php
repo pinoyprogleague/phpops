@@ -7,12 +7,22 @@
  *
  * -----------------------------------------------------------------------------
  * SAM (Software Asset Management) Core
- * 
+ *
  * This includes core helpers for Software Asset Management such as but not
  * limited to storage cleanup, public domain files management, etc.
  */
 
-function core_sam_Clean($tango, $interval, $lockfile, $metafile) {
+
+/**
+ * Clean all contents of a directory with given clean-up interval and locations
+ * of both meta file and lock file
+ *
+ * @param string    $dirpath Path of target directory
+ * @param int       $interval Clean-up interval in X days
+ * @param string    $metafile Location of clean-up meta file
+ * @param string    $lockfile Location of clean-up lock file
+ */
+function core_sam_Clean($dirpath, $interval, $metafile, $lockfile) {
     // Check if other instance is already doing the job
     if (!file_exists($lockfile)) {
 
@@ -30,7 +40,7 @@ function core_sam_Clean($tango, $interval, $lockfile, $metafile) {
                     $interval = $last->diff($today, true);
                     if ($interval->d >= 1) { // INTERVAL OF 1 DAY CLEANUP
                         // Do the job
-                        core_io_DirRemove($tango);
+                        core_io_DirRemove($dirpath);
 
                         // Delete the last-cleanup file
                         core_io_FileDelete($path, 10);
@@ -55,7 +65,4 @@ function core_sam_Clean($tango, $interval, $lockfile, $metafile) {
         }
     }
 
-}
-
-function core_sam_Cleanup($dirpath) {
 }

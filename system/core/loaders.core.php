@@ -9,7 +9,7 @@
  * @param boolean $redundant {=false} If file can be loaded redundantly, otherwise, `require_once` or `include_once` will be used
  * @param boolean $nobuffer {=false} If operation should be done w/o buffering
  */
-function core_load_php($path, $is_require=true, $destroy=false, $redundant=false, $nobuffer=false)
+function core_load_PHP($path, $is_require=true, $destroy=false, $redundant=false, $nobuffer=false)
 {
     if ( !$nobuffer ) {
         // start buffer
@@ -40,7 +40,7 @@ function core_load_php($path, $is_require=true, $destroy=false, $redundant=false
 /**
  * [ SYSTEM USE ONLY ]
  */
-function coresys_load_class($classname)
+function coresys_load_Class($classname)
 {
     if (cache_classes_IsLoaded($classname) )
     {
@@ -102,7 +102,7 @@ function coresys_load_class($classname)
         {
             $bpath = $addonpath . '.' . $ext;
             if ( file_exists($bpath) ) {
-                core_load_php($bpath, TRUE);
+                core_load_PHP($bpath, TRUE);
                 cache_classes_Add($classname, $bpath);
                 RETURN;
             }
@@ -111,7 +111,7 @@ function coresys_load_class($classname)
     }
 
 
-    core_load_php($bpath, TRUE);
+    core_load_PHP($bpath, TRUE);
     cache_classes_Add($classname, $bpath);
     RETURN;
 }
