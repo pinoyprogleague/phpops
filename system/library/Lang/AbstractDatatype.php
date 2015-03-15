@@ -11,7 +11,8 @@ namespace POPS\Lang;
 /**
  * Abstract class for Datatype implementations. Requirements: { $value }
  */
-abstract class AbstractDatatype {
+abstract class AbstractDatatype implements IDatatype {
+
 
 
 
