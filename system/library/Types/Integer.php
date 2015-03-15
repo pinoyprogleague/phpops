@@ -11,7 +11,7 @@ namespace POPS\Types;
 /**
  * Datatype for integer values, includes fundamental arithmetic operations
  */
-class Integer extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype {
+class Integer extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatypeNumeric {
 
     protected
             $value,
@@ -26,14 +26,14 @@ class Integer extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatyp
      * Construct an instance of Integer datatype
      *
      * @param int $value    The integer value to be assigned to this Integer instance
-     * @param int $max      {=PHP_INT_MAX} The maximum value this Integer instance should handle
-     * @param mixed $min    {=null} The minimum value this Integer instance should handle
+     * @param mixed $min    {=null} The minimum value this Integer instance should handle, default is null (auto)
+     * @param int $max      {=PHP_INT_MAX} The maximum value this Integer instance should handle, default is PHP_INT_MAX (auto)
      * @throws \POPS\Exceptions\InvalidIntegerException
      */
-    public function __construct($value, $max=PHP_INT_MAX, $min=NULL) {
+    public function __construct($value, $min=null, $max=PHP_INT_MAX) {
         $this->value = $value;
-        $this->lastresult = NULL;
-        $this->min = $min;
+        $this->lastresult = null;
+        $this->min = $min===null ? (PHP_INT_MAX * -1) : $min;
         $this->max = $max;
         if (!$this->isValid()) {
             unset($this->value);
@@ -86,6 +86,9 @@ class Integer extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatyp
      * @return \POPS\Types\Integer  The last result's Integer instance
      */
     public function getLastResult() {
+        if (is_null($this->lastresult)) {
+            throw new \POPS\Exceptions\NullPropertyException();
+        }
         RETURN new Integer($this->lastresult);
     }
 
@@ -133,11 +136,7 @@ class Integer extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatyp
      * @return boolean  If current value is a valid integer
      */
     public function isValid() {
-        $minimum = &$this->min;
-        $maximum = &$this->max;
-        RETURN is_integer($this->getValue())
-            && (!is_integer($minimum)?FALSE:$this->getValue()>=$minimum)
-            && (!is_integer($maximum)?FALSE:$this->getValue()<=$maximum);
+        RETURN is_integer($this->getValue()) && $this->isWithinRange();
     }
 
 
@@ -150,6 +149,33 @@ class Integer extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatyp
     public function subtract(Integer $integer) {
         $this->lastresult = $this->getValue() - $integer->getValue();
         RETURN $this->getLastResult()->getValue();
+    }
+
+    /**
+     * Get the maximum integer value
+     *
+     * @return type
+     */
+    public function getMax() {
+        return $this->max;
+    }
+
+    /**
+     * Get the minimum integer value
+     *
+     * @return int
+     */
+    public function getMin() {
+        return $this->min;
+    }
+
+    /**
+     * Check if current value is within the allowed range
+     *
+     * @return boolean  If current value is within the allowed range
+     */
+    public function isWithinRange() {
+        return $this->getValue() >= $this->getMin() && $this->getValue() <= $this->getMax();
     }
 
 }
