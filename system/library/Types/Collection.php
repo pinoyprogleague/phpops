@@ -42,6 +42,13 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
     }
 
 
+    /**
+     * Clear the items in this collection
+     */
+    public function clear() {
+        $this->items = array();
+    }
+
 
     /**
      * Check if this Collection contains certain object
@@ -60,6 +67,22 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
             }
         }
         RETURN FALSE;
+    }
+
+
+    /**
+     * Copy the items in this collection to another collection
+     *
+     * @param \POPS\Types\Collection    $collection The destination instance where copy will take place
+     * @param boolean   $is_overwrite   {=false} If items will be overwritten
+     */
+    public function copyTo(Collection &$collection, $is_overwrite=false) {
+        if ($is_overwrite) {
+            $collection->clear();
+        }
+        for ($this->startLooping(); $this->isLooping(); $this->loops()) {
+            $collection->add($this->current());
+        }
     }
 
 
@@ -195,7 +218,7 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
     /**
      * Add an item to this collection
      *
-     * @param mixed $item
+     * @param mixed $item The item to be added
      */
     public function add($item) {
         array_push($this->items, $item);
@@ -344,7 +367,12 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
     }
 
 
-
+    /**
+     * THIS IS UNDER DEVELOPMENT STAGE
+     *
+     * @param string $type
+     * @return boolean
+     */
     public function typeMatch($type) {
         for ( $this->startLooping(); $this->isLooping(); $this->loops() ) {
             if ( !($this->current() instanceof $type) ) {
@@ -378,13 +406,14 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
      * @param string $buffer Serialized byte-stream
      *
      * @return mixed The resulting instance of `Collection` if given stream is bytes of Collection, otherwise, FALSE
+     * @throws \POPS\Exceptions\InvalidBytesException
      */
-    public static function CreateFromBytes($buffer) {
+    static function CreateFromBytes($buffer) {
         $unserialized = unserialize($buffer);
         if ( $unserialized instanceof Collection ) {
             RETURN new Collection($unserialized);
         }
-        RETURN FALSE;
+        throw new \POPS\Exceptions\InvalidBytesException();
     }
 
 }
