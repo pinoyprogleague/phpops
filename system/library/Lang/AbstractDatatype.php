@@ -11,10 +11,7 @@ namespace POPS\Lang;
 /**
  * Abstract class for Datatype implementations. Requirements: { $value }
  */
-abstract class AbstractDatatype implements IDatatype {
-
-
-
+abstract class AbstractDatatype {
 
     /**
      * Check if its value is equal to another object/instance
@@ -64,13 +61,13 @@ abstract class AbstractDatatype implements IDatatype {
 
 
     /**
-     * Check if the current value of this DataType is valid, could be by using any form of checking
+     * (MUST IMPLEMENT) Check if the current value of this DataType is valid, could be by using any form of checking
      *
-     * @throws \POPS\Exceptions\NotOverriddenException
+     * @throws \POPS\Exceptions\NotImplementedException
      */
     public function isValid() {
-        // if this was still invoked, it means this method was not overridden
-        throw new \POPS\Exceptions\NotOverriddenException(__CLASS__, __FUNCTION__);
+        // if this was still invoked, it means this method was not implemented
+        throw new \POPS\Exceptions\NotImplementedException(__CLASS__, __FUNCTION__);
     }
 
 
