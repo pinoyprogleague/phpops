@@ -13,7 +13,14 @@ namespace POPS\Types;
  */
 class CollectionOf extends Collection {
 
+    private $type;
+
     public function __construct($type, Collection $collection) {
+        // Check if $type is a string
+        if (!is_string($type)) {
+            throw new InvalidStringException();
+        }
+        $reflectionClass = new \ReflectionClass(strval($type));
         if ( $collection->typeMatch($type) ) {
             parent::__construct($collection);
         }
