@@ -28,16 +28,18 @@ function core_session_Get($key)
 /**
  * Get the current URI to this application
  *
+ * @param boolean   $include_alphaslash {=false} If forward slash at the beginning should be included
+ *
  * @return string
  */
-function core_uri_Get()
+function core_uri_Get($include_alphaslash=false)
 {
     $url = $_SERVER['REQUEST_URI'];
     $basepos = defined('BASE_URI') ? strpos($url, BASE_URI) : FALSE;
     if ( $basepos!==FALSE && $basepos===0 ) {
-        $url = substr($url, $basepos+strlen(BASE_URI), strlen($url)-$basepos);
+        $url = substr($url, $basepos + strlen(BASE_URI), strlen($url) - $basepos);
     }
-    RETURN rtrim(ltrim($url, '/'), '/');
+    RETURN ($include_alphaslash ? "/" : "") . rtrim(ltrim($url, '/'), '/');
 }
 
 
