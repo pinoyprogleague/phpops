@@ -28,7 +28,8 @@ class Dictionary extends \POPS\Types\Collection {
     /**
      * Add a KeyValue pair to this Dictionary
      *
-     * @param \POPS\Elements\KeyValuePair $kv
+     * @param \POPS\Elements\KeyValuePair   $kv The new KeyValue pair object to be added
+     * @param bool                          $is_noredundantkey {=true} If adding of new KeyValue pair requires that no redundant key will exist
      */
     public function add(\POPS\Elements\KeyValuePair $kv, $is_noredundantkey)
     {
@@ -160,12 +161,20 @@ class Dictionary extends \POPS\Types\Collection {
     }
 
 
+    /**
+     * Set the value of a key
+     *
+     * @param string $key   An existing key within the dictionary
+     * @param mixed $value  The value to be assigned
+     *
+     * @throws \POPS\Exceptions\DictionaryKeyException
+     */
     public function setValue($key, $value)
     {
         if (!$this->containsKey($key)) {
             throw new \POPS\Exceptions\DictionaryKeyException($key);
         }
-
+        $this->setValue($key, $value);
     }
 
 
