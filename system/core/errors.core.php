@@ -59,7 +59,10 @@ function coresys_handle_exception(\Exception $ex)
             echo '<br>';
             echo '<u>Trace stack:</u>';
             echo '<br>';
-            echo $ex->getTraceAsString();
+//            $stackTraces = $ex->getTrace();
+//            POPS\Utils\ARRAYS::Dump($stackTraces);
+            $stackTrace = $ex->getTraceAsString();
+            echo preg_filter("/\s?#\d+\s/", "<br>", $stackTrace);
         echo '</p>';
     echo '</div>';
 }
