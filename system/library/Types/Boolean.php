@@ -13,7 +13,7 @@ namespace POPS\Types;
  *
  * @author Allen
  */
-class Boolean extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype {
+class Boolean extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatypeGeneric {
 
     private $value;
 
