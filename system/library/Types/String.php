@@ -47,6 +47,23 @@ class String extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype
 
 
     /**
+     * Get the \POPS\Types\Character instance at a specified character index
+     *
+     * @param int   $index The character index
+     *
+     * @return \POPS\Types\Character
+     * @throws \OutOfBoundsException
+     */
+    public function charAt(int $index) {
+        if ($index >= strlen($this->getValue()) || $index < 0) {
+            throw new \OutOfBoundsException();
+        }
+        $value = $this->getValue();
+        return new \POPS\Types\Character($value[$index]);
+    }
+
+
+    /**
      * Get its substring value
      *
      * @param int $start If start is NON-NEGATIVE, the returned string will start at the start'th position in string, counting from zero. For instance, in the string 'abcdef', the character at position 0 is 'a', the character at position 2 is 'c', and so forth. If start is NEGATIVE, the returned string will start at the start'th character from the end of string. If string is LESS THAN OR EQUAL to start characters long, FALSE will be returned.
