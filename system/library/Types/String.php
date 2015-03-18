@@ -46,7 +46,6 @@ class String extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype
     }
 
 
-
     /**
      * Get its substring value
      *
@@ -59,7 +58,6 @@ class String extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype
     {
         RETURN substr($this->getValue(), $start, $length);
     }
-
 
 
     /**
@@ -104,6 +102,20 @@ class String extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype
         $this->setValue('');
         RETURN $this;
     }
+
+
+    /**
+     * Get the value of this String instance
+     *
+     * @return string
+     */
+    public function getValue() {
+        return parent::getValue();
+    }
+
+    function getMinLength();
+    function getMaxLength();
+    function isWithinRange();
 
 
 }
