@@ -49,20 +49,23 @@ function coresys_handle_exception(\Exception $ex)
 {
     echo '<div style="border:2px solid #f00; padding:2%; font-family:arial;" align="left">';
         echo '<span style="font-variant:small-caps;">';
-        echo '<b><u>Uncaugh Exception</u> at Line '.$ex->getLine().'</b><br>'.$ex->getFile().'</span>';
+        echo '<b><u>Uncaugh Exception</u> at Line ' . $ex->getLine() . '</b><br>' . $ex->getFile() . '</span>';
         echo '<p style="padding:2%; border-left:3px solid #f00; margin:0px; margin-top:5px;">';
-            echo '<span style="font-variant:small-caps;">['.$ex->getCode().']&nbsp;&nbsp;</span>';
+            echo '<span style="font-variant:small-caps;">[Code: ' . $ex->getCode() . ']&nbsp;&nbsp;</span>';
+//            echo '<br>';
+            echo '<font style="font-size: 87.5%">' . get_class($ex) . '</font>';
             echo '<br>';
             echo '<br>';
-            echo $ex->getMessage();
+            echo '"' . $ex->getMessage() . '"';
             echo '<br>';
             echo '<br>';
-            echo '<u>Trace stack:</u>';
-            echo '<br>';
+            echo '<font style="font-size: 85%">';
+            echo '<u>Stack trace:</u>';
 //            $stackTraces = $ex->getTrace();
 //            POPS\Utils\ARRAYS::Dump($stackTraces);
             $stackTrace = $ex->getTraceAsString();
             echo preg_filter("/\s?#\d+\s/", "<br>", $stackTrace);
+            echo '</font>';
         echo '</p>';
     echo '</div>';
 }
