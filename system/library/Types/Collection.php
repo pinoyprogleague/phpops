@@ -103,10 +103,29 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
      *
      * @return mixed
      */
-    public function current() {
+    public function current()
+    {
         RETURN current($this->items);
     }
 
+
+    /**
+     * Get the index (first-occurence) of an item, otherwise returns FALSE if not found
+     *
+     * @param mixed     $item The item to be looked up
+     *
+     * @return boolean
+     */
+    public function indexOf($item)
+    {
+        for ($this->startLooping(); $this->isLooping(); $this->loops())
+        {
+            if ($this->current() == $item) {
+                return $this->getIndex();
+            }
+        }
+        return false;
+    }
 
 
     /**
@@ -114,7 +133,8 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
      *
      * @return boolean
      */
-    public function isLooping() {
+    public function isLooping()
+    {
         RETURN $this->valid() && ($this->getPosition() <= count($this->items));
     }
 
@@ -149,6 +169,24 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
      */
     public function key() {
         RETURN key($this->items);
+    }
+
+
+    /**
+     * Get the last index (last-occurence) of an item, otherwise returns FALSE if not found
+     *
+     * @param mixed     $item The item to be looked up
+     *
+     * @return boolean
+     */
+    public function lastIndexOf($item)
+    {
+        for ($x=$this->count(); $x > 0; $x--) {
+            if ($this->get($x)==$item) {
+                return $x - 1;
+            }
+        }
+        return false;
     }
 
 
