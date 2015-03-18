@@ -292,10 +292,12 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
      * @param mixed $newvalue New value to be assigned
      *
      * @return mixed The old value before new value assignment has been made
+     *
+     * @throws \POPS\Exceptions\NullPointerException
      */
     public function set($nth, $newvalue) {
         if ( $this->get($nth)===NULL ) {
-            // throw exception here
+            throw new \POPS\Exceptions\NullPointerException();
         }
         $oldval = $this->items[$nth-1];
         $this->items[$nth-1] = $newvalue;
