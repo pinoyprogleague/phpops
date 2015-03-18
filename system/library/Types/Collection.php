@@ -57,11 +57,11 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
      *
      * @return boolean If this collection has the specified object
      */
-    public function contains(Generic $object) {
+    public function contains($object) {
         $coll = clone $this;
         for ( $coll->startLooping(); $coll->isLooping(); $coll->loops() )
         {
-            if ( $coll->current()===$object->getValue() )
+            if ( $coll->current()==$object )
             {
                 RETURN TRUE;
             }
