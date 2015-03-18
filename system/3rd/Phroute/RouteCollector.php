@@ -23,6 +23,16 @@ class RouteCollector {
         $this->routeParser = $routeParser ?: new RouteParser();
     }
 
+
+    /**
+     * Get the reverse-engineered of an existing route path
+     *
+     * @param string    $name The route name
+     * @param mixed     $args Either a route parameter (string) or an array of route parameters (array)
+     *
+     * @return string
+     * @throws BadRouteException
+     */
     public function route($name, array $args = null)
     {
         $url = array();
