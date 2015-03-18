@@ -9,13 +9,11 @@
 namespace POPS\Types;
 
 /**
- * Data type for PHP renderable file
+ * Data type for PHP renderable files
  */
-class RenderableFile extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype, \POPS\Lang\IRenderable {
+class RenderableFile extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatypeGeneric, \POPS\Lang\IRenderable {
 
     private $value;
-
-
 
 
     /**
@@ -37,7 +35,7 @@ class RenderableFile extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\I
 
 
     /**
-     * Render this PHP file
+     * Get the rendered content/s of this PHP file
      */
     public function render() {
         ob_start();
