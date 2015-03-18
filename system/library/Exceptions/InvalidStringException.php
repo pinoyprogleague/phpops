@@ -1,6 +1,6 @@
 <?php
 
-namespace POPS\Types;
+namespace POPS\Exceptions;
 
 
 /**
@@ -9,7 +9,7 @@ namespace POPS\Types;
 class InvalidStringException extends \Exception {
 
     public function __construct() {
-        parent::__construct('Invalid string exception');
+        parent::__construct('Not valid string was provided');
     }
 
 }

@@ -9,7 +9,7 @@
 namespace POPS\Exceptions;
 
 /**
- * Description of InvalidBooleanException
+ * Exception thrown when supplying non-boolean value
  *
  * @author Allen
  */

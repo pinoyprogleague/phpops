@@ -13,6 +13,6 @@ namespace POPS\Exceptions;
 class NotImplementedException extends \Exception
 {
     public function __construct($className, $functionName) {
-        parent::__construct('Method "'.$className.'::'.$functionName.'" was not overridden or might still have been parent-invoked even after being overridden', 0);
+        parent::__construct('Method "' . $className . '::' . $functionName . '" was not implemented or might still have been parent-invoked even after being overridden', 0);
     }
 }
