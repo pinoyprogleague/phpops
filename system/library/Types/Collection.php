@@ -114,7 +114,7 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
      *
      * @param mixed     $item The item to be looked up
      *
-     * @return boolean
+     * @return mixed
      */
     public function indexOf($item)
     {
@@ -177,7 +177,7 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
      *
      * @param mixed     $item The item to be looked up
      *
-     * @return boolean
+     * @return mixed
      */
     public function lastIndexOf($item)
     {
@@ -187,6 +187,20 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
             }
         }
         return false;
+    }
+
+
+    /**
+     * Get the position (last-occurence) of an item, otherwise returns FALSE if not found
+     *
+     * @param mixed     $item The item to be looked up
+     *
+     * @return mixed
+     */
+    public function lastPositionOf($item)
+    {
+        $lastIndexOf = $this->lastIndexOf($item);
+        return $lastIndexOf ? $lastIndexOf + 1 : $lastIndexOf;
     }
 
 
@@ -200,6 +214,20 @@ class Collection implements \POPS\Lang\IListable, \POPS\Lang\ICollectionTypeMatc
         $ret = next($this->items);
         $this->position++;
         RETURN $ret;
+    }
+
+
+    /**
+     * Get the position (first-occurence) of an item, otherwise returns FALSE if not found
+     *
+     * @param mixed     $item The item to be looked up
+     *
+     * @return mixed
+     */
+    public function positionOf($item)
+    {
+        $indexOf = $this->indexOf($item);
+        return $indexOf ? $indexOf + 1 : $indexOf;
     }
 
 
