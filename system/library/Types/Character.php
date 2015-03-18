@@ -13,7 +13,7 @@ namespace POPS\Types;
  *
  *
  */
-class Character extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype {
+class Character extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatypeGeneric {
 
     protected $value;
 
@@ -23,12 +23,6 @@ class Character extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatat
             throw new \POPS\Exceptions\InvalidCharacterException($value);
         }
         $this->value = $value;
-
-    }
-
-
-    
-    public function isValid() {
 
     }
 
