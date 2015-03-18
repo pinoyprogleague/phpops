@@ -34,23 +34,16 @@ function coresys_deck_LaunchApp()
  */
 function coresys_deck_DeriveCallable($uri=NULL)
 {
-    if ( $uri===NULL ) {
-        // get current URI if no specified
-        $uri = core_uri_Get();
-    }
+    print_r(core_deck_ReadURI(core_uri_Get()));
 
-    $commands = core_deck_ReadURI(strtolower(core_uri_Get()));
-    $derivedControllerCallable = strtoupper(POPS_APP_MODULES_DIRNAME).'\\';
+    $router = new \Phroute\RouteCollector();
+    $router->addRoute(Phroute\Route::ANY, "/{name:[a-zA-Z0-9_]+}/{anything}", function($name) {
+        return "Hello $name";
+    });
 
-    if ( count($commands)==0 ) {
-        // use Default Controller
-        $derivedControllerCallable .= coresys_app_GetMainController();
-    }
-    else {
-
-    }
-
-    RETURN $derivedControllerCallable;
+    $dispatcher = new \Phroute\Dispatcher($router);
+    $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], core_uri_Get(true));
+    echo $response;
 }
 
 
@@ -58,12 +51,15 @@ function coresys_deck_DeriveCallable($uri=NULL)
 /**
  * Read current URI into a URI commands array
  *
- * @param string $uricmd The URI command, you may want to use the function core_uri_Get() ^_^
+ * @param string    $uricmd {=null} The URI command to be read, otherwise, current URI will be read
  *
  * @return array Chunked URIs in array, otherwise, blank array if provided URI has no commands
  */
-function core_deck_ReadURI($uricmd)
+function core_deck_ReadURI($uricmd = null)
 {
+    if ($uricmd===null) {
+        $uricmd = core_uri_Get();
+    }
     $uricmd = core_str_RemoveConsecutive(trim(ltrim(rtrim($uricmd,'/'), '/')), new POPS\Types\Character('/'));
     if (strlen($uricmd) > 0 ) {
         RETURN explode('/', $uricmd);
@@ -79,11 +75,5 @@ function core_deck_ReadURI($uricmd)
  * @param string $controllerCallable Callable controller name
  */
 function coresys_deck_RunController($controllerCallable) {
-    $PageController = new $controllerCallable();
 
-    // Get the parameters for this page
-    $Parameters = POPS\Requests\PageParameter::getPageParameters($controllerCallable);
-
-    // Run the controller
-    $PageController->run($Parameters===FALSE ? NULL : $Parameters);
 }
