@@ -9,7 +9,7 @@
 namespace POPS\Exceptions;
 
 /**
- * Exception for supplying non-array objects
+ * Exception for supplying non-character value
  */
 class InvalidCharacterException extends \Exception
 {
