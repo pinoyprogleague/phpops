@@ -15,12 +15,26 @@ namespace POPS\Collections;
  */
 class Dictionary extends \POPS\Types\Collection {
 
-    public function __construct() {
+
+    /**
+     * Create a new Dictionary instance
+     */
+    public function __construct()
+    {
         parent::__construct();
     }
 
 
-    public function add(\POPS\Elements\KeyValuePair $kv) {
+    /**
+     * Add a KeyValue pair to this Dictionary
+     *
+     * @param \POPS\Elements\KeyValuePair $kv
+     */
+    public function add(\POPS\Elements\KeyValuePair $kv, $is_noredundantkey)
+    {
+        if ($this->containsKey($kv->getKey())) {
+
+        }
         parent::add($kv);
     }
 
@@ -30,7 +44,8 @@ class Dictionary extends \POPS\Types\Collection {
      *
      * @return \POPS\Elements\KeyValuePair      The current KeyValue pair item in current internal pointer
      */
-    public function current() {
+    public function current()
+    {
         return parent::current();
     }
 
@@ -40,9 +55,11 @@ class Dictionary extends \POPS\Types\Collection {
      *
      * @param mixed     $key The key to be looked up
      * @param boolean   $is_casesensitive {=false} If value specified is a string and should be case-sensitive
+     *
      * @return boolean  If this dictionary contains the specified key
      */
-    public function containsKey($key, $is_casesensitive=false) {
+    public function containsKey($key, $is_casesensitive=false)
+    {
         for ($this->startLooping(); $this->isLooping(); $this->loops()) {
             $current = $this->current();
             if ($is_casesensitive ? $current->getKey() == $key
@@ -59,9 +76,11 @@ class Dictionary extends \POPS\Types\Collection {
      *
      * @param mixed     $value The value to be looked up
      * @param boolean   $is_casesensitive {=false} If value specified is a string and should be case-sensitive
+     *
      * @return boolean  If this dictionary contains a certain value
      */
-    public function containsValue($value, $is_casesensitive=false) {
+    public function containsValue($value, $is_casesensitive=false)
+    {
         for ($this->startLooping(); $this->isLooping(); $this->loops()) {
             $current = $this->current();
             if ($is_casesensitive ? $current->getValue() === $value
@@ -81,8 +100,30 @@ class Dictionary extends \POPS\Types\Collection {
      *
      * @return \POPS\Elements\KeyValuePair
      */
-    public function get($nth) {
+    public function get($nth)
+    {
         return parent::get($nth);
+    }
+
+
+    /**
+     * Get the position of a key, otherwise, returns FALSE if key was not found
+     *
+     * @param string    $key The key to look up
+     *
+     * @return mixed
+     */
+    public function getKeyPosition($key)
+    {
+        for ($this->startLooping(); $this->isLooping(); $this->loops()) {
+            $current = $this->current();
+            if ($current instanceof \POPS\Elements\KeyValuePair) {
+                if ($current->getKey()==$key) {
+                    return $this->getPosition();
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -93,7 +134,8 @@ class Dictionary extends \POPS\Types\Collection {
      *
      * @return mixed    The value of the specified key, otherwise, FALSE if key does not exist
      */
-    public function getValue($key) {
+    public function getValue($key)
+    {
         $kv = $this->getKV($key);
         if ($kv instanceof \POPS\Elements\KeyValuePair) {
             return $kv->getValue();
@@ -112,8 +154,18 @@ class Dictionary extends \POPS\Types\Collection {
      *
      * @return mixed The old value before new value assignment has been made
      */
-    public function set($nth, \POPS\Elements\KeyValuePair $newvalue) {
+    public function set($nth, \POPS\Elements\KeyValuePair $newvalue)
+    {
         parent::set($nth, $newvalue);
+    }
+
+
+    public function setValue($key, $value)
+    {
+        if (!$this->containsKey($key)) {
+            throw new \POPS\Exceptions\DictionaryKeyException($key);
+        }
+
     }
 
 
