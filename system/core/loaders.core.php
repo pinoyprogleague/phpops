@@ -58,7 +58,7 @@ function coresys_load_Class($classname)
     $is_system = $appLoadable && $csegments[0]==='POPS';
     $is_module = $appLoadable && strtoupper($csegments[0])===strtoupper(POPS_APP_MODULES_DIRNAME);
     $is_template = $appLoadable && strtoupper($csegments[0])===strtoupper(POPS_APP_TEMPLATES_DIRNAME);
-    $is_page = $appLoadable && strtouper($csegments[0])===strotupper(POPS_APP_PAGES_DIRNAME);
+    $is_page = $appLoadable && strtoupper($csegments[0])===strtoupper(POPS_APP_PAGES_DIRNAME);
 
 
     for ( $x=($is_system||$is_module||$is_template||$is_page)?1:0; $x<count($csegments)-1; $x++,next($csegments) )

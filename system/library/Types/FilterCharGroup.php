@@ -19,8 +19,13 @@ class FilterCharGroup extends Collection {
     /**
      * Create new instance of FilterCharGroup
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
+        // Absorb indefinite parameters
+        for ($x=0; $x < func_num_args(); $x++) {
+            $this->add(func_get_arg($x));
+        }
     }
 
 
@@ -31,11 +36,29 @@ class FilterCharGroup extends Collection {
      *
      * @throws \POPS\Exceptions\InvalidCharacterException
      */
-    public function add($item) {
+    public function add($item)
+    {
+        // Validate item
         if (!$this->_validateItem($item)) {
             throw new \POPS\Exceptions\InvalidCharacterException();
         }
-        parent::add($item instanceof Character ? $item->getValue() : $item);
+        // Check for redundancy
+        if ($this->contains($item)) {
+            return;
+        }
+        parent::add($item instanceof Character ? $item : new Character($item));
+    }
+
+
+    /**
+     * Returns the current item at internal pointer
+     *
+     * @return \POPS\Types\Character
+     */
+    public function current()
+    {
+        $ret = parent::current();
+        return $ret instanceof Character ? $ret : new Character($ret);
     }
 
 
@@ -44,16 +67,56 @@ class FilterCharGroup extends Collection {
      *
      * @param \POPS\Types\String    $str The string to be filtered
      *
-     * @return string
+     * @return \POPS\Types\String
      */
-    public function filter(String $str) {
+    public function filter(String $str)
+    {
         $val = $str->getValue();
         for ($this->startLooping(); $this->isLooping(); $this->loops())
         {
             $current = $this->current();
-            $val = str_replace($current, "", $val);
+            $val = str_replace($current->getValue(), "", $val);
         }
-        return $val;
+        return new String($val);
+    }
+
+
+
+    public function filterRedundant(String $str)
+    {
+        if ($str->getLength() > 1) {
+            $newstr = new String();
+            for ($prev=$str->charAt(0),$matchPosition=false,$x=1; /**/ $x < $str->getLength(); /**/ $x++)
+            {
+                $current = $str->charAt($x);
+                $matchPosition = $this->positionOf($current);
+                if ($matchPosition) {
+                    if ($current->equals($prev)) {
+                        $prev = $current;
+                        continue;
+                    }
+                }
+                $newstr->append($str->getValue());
+                $prev = $current;
+            }
+        }
+        else {
+            return new String($str->getValue());
+        }
+    }
+
+
+    /**
+     * Gets the Character at `nth` position
+     *
+     * @param int $nth Position of character item
+     *
+     * @return \POPS\Types\Character
+     */
+    public function get($nth)
+    {
+        $ret = parent::get($nth);
+        return $ret instanceof Character ? $ret : new Character($ret);
     }
 
 
@@ -67,12 +130,13 @@ class FilterCharGroup extends Collection {
      *
      * @throws \POPS\Exceptions\InvalidCharacterException
      */
-    public function set($nth, $newvalue) {
+    public function set($nth, $newvalue)
+    {
         if (!$this->_validateItem($newvalue)) {
             throw new \POPS\Exceptions\InvalidCharacterException();
         }
         $oldvalue = $this->get($nth);
-        parent::set($nth, $item instanceof Character ? $item->getValue() : $item);
+        parent::set($nth, $newvalue instanceof Character ? $newvalue : new Character($newvalue));
 
         return $oldvalue;
     }
@@ -85,7 +149,8 @@ class FilterCharGroup extends Collection {
      *
      * @return boolean
      */
-    protected function _validateItem($item) {
+    protected function _validateItem($item)
+    {
         if ($item==null || is_array($item)) {
             return false;
         }

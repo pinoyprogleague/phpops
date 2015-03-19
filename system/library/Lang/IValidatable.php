@@ -9,13 +9,13 @@
 namespace POPS\Lang;
 
 /**
- * Interface for routable controllers
+ * Interface for classes that implements validation
  *
  * @author Allen
  */
-interface IRoutable {
+interface IValidatable {
 
-    function getRouteName();
-    function setRouteName($routename);
+    function isValid();
+    function isWithinRange();
 
 }

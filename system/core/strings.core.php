@@ -24,9 +24,9 @@
 function core_str_RemoveConsecutive($string, POPS\Types\Character $char=NULL)
 {
     $newstring = '';
-    for ( $x=0,$prev=NULL,$match=is_null($char)?NULL:$char->getValue(); $x<strlen($string); $x++ )
+    for ( $x=0,$prev=NULL,$match=$char==null?null:$char->getValue(); $x < strlen($string); $x++ )
     {
-        if ( !(($match!==NULL && $match==$prev && $string[$x]==$match)  || ($prev!==NULL && $string[$x]==$prev)) )
+        if ( !($match!=null ? ($match!=null && $match==$prev && $string[$x]==$match) : ($prev!==NULL && $string[$x]==$prev)) )
         {
             $newstring .= $string[$x];
         }

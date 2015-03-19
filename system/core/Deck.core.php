@@ -57,10 +57,13 @@ function coresys_deck_DeriveCallable($uri=NULL)
  */
 function core_deck_ReadURI($uricmd = null)
 {
-    if ($uricmd===null) {
+    if ($uricmd == null) {
         $uricmd = core_uri_Get();
     }
-    $uricmd = core_str_RemoveConsecutive(trim(ltrim(rtrim($uricmd,'/'), '/')), new POPS\Types\Character('/'));
+    echo $uricmd.'<br>';
+    $filterGroup = new \POPS\Types\FilterCharGroup("/", 'l');
+    $uricmd = $filterGroup->filter(new POPS\Types\String(trim(ltrim(rtrim($uricmd,'/'), '/'))))->getValue();
+//    $uricmd = core_str_RemoveConsecutive(trim(ltrim(rtrim($uricmd,'/'), '/')), new POPS\Types\Character('/'));
     if (strlen($uricmd) > 0 ) {
         RETURN explode('/', $uricmd);
     }

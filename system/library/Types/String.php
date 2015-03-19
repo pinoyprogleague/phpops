@@ -13,7 +13,7 @@ namespace POPS\Types;
  */
 class String extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatypeGeneric {
 
-    private $value;
+    protected $value;
 
 
     /**
@@ -129,10 +129,6 @@ class String extends \POPS\Lang\AbstractDatatype implements \POPS\Lang\IDatatype
     public function getValue() {
         return parent::getValue();
     }
-
-    function getMinLength();
-    function getMaxLength();
-    function isWithinRange();
 
 
 }

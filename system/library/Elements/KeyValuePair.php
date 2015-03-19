@@ -13,7 +13,7 @@ namespace POPS\Elements;
  *
  * @author Allen
  */
-class KeyValuePair {
+class KeyValuePair extends \POPS\Object {
 
     private $key;
     private $value;
@@ -61,6 +61,16 @@ class KeyValuePair {
     public function toArrayElement() {
         $res[$this->getKey()] = $this->getValue();
         return $res;
+    }
+
+
+    public function __toString() {
+        parent::__toString();
+        $rClass = new \ReflectionClass(get_class($this));
+        $properties = $rClass->getProperties();
+        foreach ($properties as $property) {
+            
+        }
     }
 
 }
